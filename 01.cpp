@@ -66,9 +66,9 @@ int total_difference(ave::set const& a_set, ave::set const& b_set) {
 #endif
 
 int similarity_score(ave::set const& a_set, ave::set const& b_set) {
-// #if defined(AOC_USE_RANGES)
-#if 0
-    return std::ranges::fold_left(a_set, 0, [](int total, const auto& a_item) { return total + a_item; });
+#if defined(AOC_USE_RANGES)
+    return std::ranges::fold_left(
+        a_set, 0, [&](int total, const auto& a_item) { return total + a_item * b_set.count(a_item); });
 #else
     int ret{};
     for (auto&& a_item : a_set) {
